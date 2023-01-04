@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    // ...
+    "rootDir": "./src",
+    "outDir": "./build",
+    "target": "es2019",
+    "module": "commonjs",
+    "sourceMap": true,   
+    // ...
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build"]
+}

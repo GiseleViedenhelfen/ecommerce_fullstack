@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.app = exports.App = void 0;
+const express = require("express");
+class App {
+    constructor() {
+        this.app = express();
+        this.app.get('/', (req, res) => res.json({ ok: true }));
+    }
+    start(PORT) {
+        this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+    }
+}
+exports.App = App;
+exports.app = new App().app;
+//# sourceMappingURL=app.js.map
