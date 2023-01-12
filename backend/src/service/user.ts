@@ -9,15 +9,15 @@ interface JwtUser {
 class UserService {
   public model = User;
 
-  public async Login(email:string, password: string): Promise<JwtUser | null> {
-    const user = await this.model.findOne({ where: { email } }) as User;
+  public async Login(email:string, password: string): Promise<User | null> {
+    const user = await this.model.findOne({ where: { email }}) as User;
     
    if (!bCryptPasswordValidation(password, user.password)) {
     return null;
     }
     const token = tokenGenerate(user);
-
-    return token as unknown as JwtUser;
+     const {id, name, role} = user;
+    return { id, name, role, token } as unknown as User;
   }
 
   public async validate(userData: JwtUser): Promise<string> {

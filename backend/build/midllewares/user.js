@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_model_1 = require("../database/models/user.model");
 const user_1 = require("../service/user");
+const Jwt = require("jsonwebtoken");
+const JWT_SECRET = 'jwt_secret';
 class LoginMiddle {
     constructor(userService = new user_1.default()) {
         this.userService = userService;
@@ -23,6 +25,8 @@ class LoginMiddle {
         };
         this.validateAuth = async (req, res, next) => {
             const { authorization } = req.headers;
+            const verifica = Jwt.verify(authorization, JWT_SECRET);
+            console.log(verifica);
             if (!authorization) {
                 return res.status(401).json({ message: 'Incorrect email or password' });
             }

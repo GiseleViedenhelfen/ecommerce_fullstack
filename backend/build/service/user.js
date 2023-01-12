@@ -10,7 +10,6 @@ class UserService {
     }
     async Login(email, password) {
         const user = await this.model.findOne({ where: { email } });
-        console.log(user);
         if (!(0, bCryptPassVal_1.default)(password, user.password)) {
             return null;
         }
