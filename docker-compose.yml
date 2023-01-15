@@ -1,7 +1,21 @@
 version: '3.9'
 services:
+  frontend:
+    container_name: frontend_store
+    build: ./frontend
+    ports:
+      - 3000:3000
+    platform: linux/x86_64
+    working_dir: /frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]  # Caso utilize outra porta interna para o front, altere ela aqui também
+      timeout: 10s
+      retries: 5
   backend:
-    container_name: backend
+    container_name: backend_store
     build: ./backend
     ports:
       - 3001:3001

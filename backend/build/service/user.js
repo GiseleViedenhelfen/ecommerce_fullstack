@@ -14,7 +14,8 @@ class UserService {
             return null;
         }
         const token = (0, jwtGenerator_1.default)(user);
-        return token;
+        const { id, name, role } = user;
+        return { id, name, role, token };
     }
     async validate(userData) {
         const { userId } = userData;
